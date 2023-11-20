@@ -1,20 +1,24 @@
 function logger(req, res, next) {
-  console.log(`[${new Date().toISOString()}] ${req.method} to ${req.url} ${req.get(
-    'Origin'
-  )}`
-  );
+  const timeStamp = new Date().toLocaleString()
+  const method = req.method
+  const url = req.originalUrl
+  console.log(`[${timeStamp}] ${method} ${url}`)
+  next()
 }
 
 function validateUserId(req, res, next) {
-  // DO YOUR MAGIC
+ console.log('validateUserId middleware')
+ next()
 }
 
 function validateUser(req, res, next) {
-  // DO YOUR MAGIC
+ console.log('logger middleware')
+ next()
 }
 
 function validatePost(req, res, next) {
-  // DO YOUR MAGIC
+ console.log('validateUser middleware')
+ next()
 }
 
 module.exports = {
