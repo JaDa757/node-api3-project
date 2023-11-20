@@ -17,7 +17,7 @@ async function validateUserId(req, res, next) {
       })
     } else {
       req.user = user
-    next()
+      next()
     }
   } catch (error) {
     res.status(500).json({
@@ -27,8 +27,15 @@ async function validateUserId(req, res, next) {
 }
 
 function validateUser(req, res, next) {
-  console.log('logger middleware')
-  next()
+  const { name } = req.body
+  if (!name || !name.trim()) {
+    res.status(400).json({
+      message: "missing required name field",
+    })
+  } else {
+    req.name = name.trim()
+    next()
+  }
 }
 
 function validatePost(req, res, next) {
